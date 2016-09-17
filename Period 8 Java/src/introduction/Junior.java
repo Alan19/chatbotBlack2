@@ -11,6 +11,6 @@ public class Junior extends Student {
 	
 	public void talk(){
 		super.talk();
-		System.out.println("... and I am a junior! My favorite AP is " + favoriteAP);
+		System.out.println("... and I am a junior! My favorite AP class is " + favoriteAP);
 	}
 }
