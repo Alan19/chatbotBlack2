@@ -22,6 +22,44 @@ public class DataTypes {
 		System.out.println("d2 : " + d2); 
 		System.out.println("d3 : " + d3);  
 		System.out.println("d1 - d2 : " + (d1 - d2));
+		//The variables in the quotes are ignored and the variables outside of the quotes are evaluated properly
+		
+		/*String s = 1;
+		System.out.println(s);
+		Will not compile because 1 is an int and the type is a string*/
+		
+		/*String s = (String)1;
+		System.out.println(s);
+		Ints cannot be cast into a string*/
+		
+		/*String s = "1";
+		System.out.println(s);*/
+
+		/*String s = ""+1;
+		System.out.println(s);
+		
+		String s = "Happy "+18+"th birthday!";
+		System.out.println(s);
+		
+		String s = "Happy 18th birthday!";
+		System.out.println(s);
+		
+		String s = "Happy "+54/3+"th birthday!";
+		System.out.println(s);
+
+		String s = "Happy "+(54/3)+"th birthday!";
+		System.out.println(s);
+		
+		int m = 22;
+		int n = 7;
+		System.out.println("m/n is "+(m/n));*/
+		
+		int m = 22;
+		int n = 7;
+		System.out.println("m/n is "+((double)m/n));
+		
+
+
 
 	}
 

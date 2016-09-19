@@ -13,4 +13,8 @@ public class Student {
 		System.out.println("Hello, my name is " + name);
 	}
 	
+	public void greet(){
+		System.out.println("Hello, I am a student and my name is " + name);
+	}
+
 }
