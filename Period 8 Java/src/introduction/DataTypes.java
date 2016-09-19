@@ -13,6 +13,16 @@ public class DataTypes {
 		System.out.println((int)(3.0 + 5)/(2 + 5 * 2));
 		//The first evaluates everything properly as doubles are placed in the correct places while the second one is not. The third uses a different order of operations while casted as an int which removes the decimals.
 		if(42 == 42.0) System.out.println("42 equals 42.0");
+		//Testing Precision
+		double d1 = 4.64; 
+		double d2 = 2.0;
+		double d3 = 2.64;
+
+		System.out.println("d1 : " + d1); 
+		System.out.println("d2 : " + d2); 
+		System.out.println("d3 : " + d3);  
+		System.out.println("d1 - d2 : " + (d1 - d2));
+
 	}
 
 }
