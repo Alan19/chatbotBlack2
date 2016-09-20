@@ -12,7 +12,7 @@ public class DataTypes {
 		//Changing the position of the double changed the output because 5/2 is an operation using two ints and this will return an int which would be 2 instead of 2.5
 		System.out.println((int)(3.0 + 5)/(2 + 5 * 2));
 		//The first evaluates everything properly as doubles are placed in the correct places while the second one is not. The third uses a different order of operations while casted as an int which removes the decimals.
-		if(42 == 42.0) System.out.println("42 equals 42.0");
+		//if(42 == 42.0) System.out.println("42 equals 42.0");
 		//Testing Precision
 		double d1 = 4.64; 
 		double d2 = 2.0;
@@ -57,6 +57,12 @@ public class DataTypes {
 		int m = 22;
 		int n = 7;
 		System.out.println("m/n is "+((double)m/n));
+		
+		String ten = "10";
+		String two = "2";
+				
+		if(ten.compareTo(two)>0) System.out.print("10 is greater than two");
+		else System.out.print("10 is not greater than two");
 		
 
 
