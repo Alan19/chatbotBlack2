@@ -3,7 +3,7 @@ package groupFiles;
 public class SagawaGrammerBot implements Chatbot {
 
 	public void talk() {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
