@@ -113,7 +113,8 @@ public class ZhenMain {
 		input = new Scanner(System.in);
 		user = "";
 		//Initialize group chatbots below
-//		school = new ZhenSchool();
+		grammar = new SagawaGrammerBot();
+		testing = new ZhenTestingBot();
 		
 	}
 	
