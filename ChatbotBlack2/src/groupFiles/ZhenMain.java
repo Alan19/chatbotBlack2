@@ -71,10 +71,10 @@ public class ZhenMain {
 		searchString = searchString.trim();
 		searchString = searchString.toLowerCase();
 		keyword = keyword.toLowerCase();
-		System.out.println("The phrase is " + searchString);
-		System.out.println("The keyword is " + keyword);
+		//System.out.println("The phrase is " + searchString);
+		//System.out.println("The keyword is " + keyword);
 		int psn = searchString.indexOf(keyword);
-		System.out.println("The keyword was found at " + psn);
+		//System.out.println("The keyword was found at " + psn);
 		//Keep searching until context keyword found
 		while(psn >= 0){
 			//Assume preceded and followed by space
@@ -83,20 +83,20 @@ public class ZhenMain {
 			//Check character in front if it exists
 			if(psn > 0){
 				before = searchString.substring(psn - 1, psn);
-				System.out.println("the character before is " + before);
+				//System.out.println("the character before is " + before);
 			}
 			//Check if there is a character after the keyword
 			if(psn + keyword.length() < searchString.length()){
 				after = searchString.substring(psn =  keyword.length(), psn + keyword.length() + 1);
-				System.out.println("the character after is " + after);
+				//System.out.println("the character after is " + after);
 			}
 			if(before.compareTo("a") < 0 && after.compareTo("a") < 0 &&  noNegations(searchString, psn)){
-				System.out.println("Found " + keyword + " at " + psn);
+				//System.out.println("Found " + keyword + " at " + psn);
 				return psn;
 			}
 			else{
 				psn = searchString.indexOf(keyword, psn+1);
-				System.out.println("Did not find " + keyword + " checking position " + psn);
+				//System.out.println("Did not find " + keyword + " checking position " + psn);
 			}
 		}
 		return -1;
