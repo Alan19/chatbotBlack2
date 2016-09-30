@@ -16,20 +16,19 @@ public class AhmedCollege implements Chatbot{
 				ZhenMain.promptForever();
 			}
 			else{
-				ZhenMain.println("");
+				ZhenMain.println("I'm glad you're so concerned about your future! " +
+						"Tell me about your SAT score first.");
 			}
 		}
 	}
 
 	public boolean isTriggered(String userInput) {
-		//String[] triggers = {"SAT", "ACT", "college"};
-		//can use for to iterate thru array and input
+		String[] triggers = {"sat", "act", "college", "future"};
 		
-		if(ZhenMain.findKeyword(userInput, "college", 0) >= 0){
-			return true;
-		}
-		if(ZhenMain.findKeyword(userInput, "SAT", 0) >= 0){
-			return true;
+		for(int i=0; i < triggers.length; i++){
+			if(ZhenMain.findKeyword(userInput, triggers[i], 0) >= 0){
+				return true;
+			}
 		}
 		return false;
 	}
