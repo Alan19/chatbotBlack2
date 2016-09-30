@@ -7,6 +7,8 @@ public class ZhenMain {
 	static boolean inMainLoop;
 	static Scanner input;
 	static String user;
+	static Chatbot testing;
+	static Chatbot grammar;
 	
 	//List all the chatbots available under this class
 	
@@ -34,14 +36,14 @@ public class ZhenMain {
 			if(findKeyword(response, "good", 0) >= 0){
 				println("That's wonderful. So glad you feel good.");
 			}
-//			else if(response.indexOf("school") >= 0){
-//				println("School is great! Tell me about school.");
-//				
-//				//Exit while loop
-//				inMainLoop = false;
-//				//Go to the school's talk method
-//				school.talk();
-//			}
+			else if(response.indexOf("school") >= 0){
+				println("School is great! Tell me about school.");
+				
+				//Exit while loop
+				inMainLoop = false;
+				//Go to the school's talk method
+				testing.talk();
+			}
 			else{
 				println("I don't understand");
 			}

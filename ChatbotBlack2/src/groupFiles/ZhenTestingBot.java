@@ -15,7 +15,7 @@ public class ZhenTestingBot implements Chatbot{
 				inTestingLoop = false;
 				ZhenMain.promptForever();
 			}
-			ZhenMain.println("That's my favorite part about school too!");
+			ZhenMain.println("Do you need help with something?");
 		}
 		
 	}
