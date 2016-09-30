@@ -7,7 +7,12 @@ public class ZhenMain {
 	static boolean inMainLoop;
 	static Scanner input;
 	static String user;
+
 	static Chatbot major;
+	static Chatbot testing;
+	static Chatbot grammar;
+	static Chatbot college;
+
 	
 	//List all the chatbots available under this class
 	
@@ -35,20 +40,26 @@ public class ZhenMain {
 			if(findKeyword(response, "good", 0) >= 0){
 				println("That's wonderful. So glad you feel good.");
 			}
-//			else if(response.indexOf("school") >= 0){
-//				println("School is great! Tell me about school.");
-//				
-//				//Exit while loop
-//				inMainLoop = false;
-//				//Go to the school's talk method
-//				school.talk();
-//			}
-			
-			//Javiy's code from lines 48-
+
 			else if(ZhenMain.major.isTriggered(response))
 			{
 				inMainLoop = false;
-				major.talk();
+			}
+			else if (grammar.isTriggered(response)){
+				//Exit while loop
+				inMainLoop = false;
+				
+				//Go to the school's talk method
+				grammar.talk();
+			}
+			else if(testing.isTriggered(response)){
+				inMainLoop = false;
+				testing.talk();
+			}
+			else if(college.isTriggered(response)){
+				inMainLoop = false;
+				college.talk();
+
 			}
 			else{
 				println("I don't understand");
@@ -110,7 +121,6 @@ public class ZhenMain {
 		return true;
 	}
 
-	
 	public static String promptInput() {
 		String userInput = input.nextLine();
 		return userInput;
@@ -120,8 +130,9 @@ public class ZhenMain {
 		input = new Scanner(System.in);
 		user = "";
 		//Initialize group chatbots below
-//		school = new ZhenSchool();
-		
+		grammar = new SagawaGrammerBot();
+		testing = new ZhenTestingBot();
+		college = new AhmedCollege();
 	}
 	
 	public static void println(String s){
@@ -152,23 +163,13 @@ public class ZhenMain {
 		
 		System.out.println(printString);
 	}
-
-	public static void demonstrateStringMethods(){
-		String text1 = new String("Hello World");
-		String text2 = "Hello World";
-		
-		if(text1.equals(text2)){
-			System.out.println("These strings are equal");			
-		}
-		println(text1);
-		
-		String word1 = "Aardvark";
-		String word2 = "Zyzzyva";
-		
-		if(word1.compareTo(word2) < 0){
-			println("Word 1 comes before Word 2");
-		}
+	
+	public static int pickRandomElement(int end){
+		return (int) Math.random()*end; 
 	}
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'master' of https://github.com/Alan19/chatbotBlack2.git
 }

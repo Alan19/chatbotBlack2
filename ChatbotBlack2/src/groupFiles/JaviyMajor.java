@@ -1,5 +1,7 @@
 package groupFiles;
 
+import chatbot.JaviyMain;
+
 public class JaviyMajor extends Object implements Chatbot{
 	
 	private boolean inMajorLoop;
@@ -42,6 +44,16 @@ public class JaviyMajor extends Object implements Chatbot{
 		{};
 	private String[] existingMajors = {"biosci","bioscience","chem","chemistry"," collegeprep",
 			"finance","media","software"};
+	private String[] calmResponses = 
+		{"We already said hello please move on.","You said hello already did you forget?"};
+	private String[] angryResponses =
+		{"Okay seriously. Stop saying hello.","I WILL: KILL YOU IF U SAY IT AGAIN! XD"};
+	private int majorCount;
+	
+	public JaviyMajor(){
+		majorCount = 0;
+	}
+	
 	
 	public void talk() {
 		inMajorLoop = true;
@@ -60,12 +72,28 @@ public class JaviyMajor extends Object implements Chatbot{
 			if(majorsExist(MajorResponse)==true){
 				ZhenMain.println("That's that's great let's talk about the major you are interested in.");
 			}
+			else
+			{
+				majorDoesntExist();
+			}
 			ZhenMain.println("That's the worst part about Majors.");
 		}
 		
 	}
 
 	
+	private void majorDoesntExist() {
+		if(majorCount>4){
+			int reponseSelection = (int)(Math.random()*angryResponses.length);
+			ZhenMain.println(angryResponses[reponseSelection]);
+		}else
+		{
+			int reponseSelection = (int)(Math.random()*calmResponses.length);
+			ZhenMain.println(calmResponses[reponseSelection]);
+		}
+	}
+
+
 	private boolean majorsExist(String userInput) {
 		for(int i = 0; i < existingMajors.length ;i++){
 			if(ZhenMain.findKeyword(userInput, existingMajors[i], 0) >= 0){
