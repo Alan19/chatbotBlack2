@@ -114,7 +114,6 @@ public class ZhenMain {
 		if((psn - 6 >= 0) && searchString.substring(psn-6, psn).equals("not ")){
 			return false;
 		}
-		//Check for "never "
 		if((psn - 4 >= 0) && searchString.substring(psn-4, psn).equals("never ")){
 			return false;
 		}
@@ -171,3 +170,5 @@ public class ZhenMain {
 	}
 
 }
+
+
