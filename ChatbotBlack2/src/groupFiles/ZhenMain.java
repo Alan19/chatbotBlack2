@@ -59,7 +59,10 @@ public class ZhenMain {
 			else if(college.isTriggered(response)){
 				inMainLoop = false;
 				college.talk();
-
+			}
+			else if(major.isTriggered(response)){
+				inMainLoop = false;
+				major.talk();
 			}
 			else{
 				println("I don't understand");
