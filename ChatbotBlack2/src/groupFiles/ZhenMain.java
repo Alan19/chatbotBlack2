@@ -128,10 +128,12 @@ public class ZhenMain {
 	public static void createFields() {
 		input = new Scanner(System.in);
 		user = "";
+		
 		//Initialize group chatbots below
 		grammar = new SagawaGrammerBot();
 		testing = new ZhenTestingBot();
 		college = new AhmedCollege();
+		major = new JaviyMajor();
 	}
 	
 	public static void println(String s){
@@ -166,6 +168,7 @@ public class ZhenMain {
 	public static int pickRandomElement(int end){
 		return (int) Math.random()*end; 
 	}
+
 }
 
 

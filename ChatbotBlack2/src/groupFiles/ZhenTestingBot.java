@@ -30,8 +30,12 @@ public class ZhenTestingBot implements Chatbot{
 		}
 		return false;
 	}
-	private int[] getClubCredits(int years){
-		return null;
+	private int[] getClubCredits(int years, int currentCredits){
+		int remainingCredits = 32-currentCredits;
+		if(remainingCredits <= 0){
+			
+			return null;
+		}
 		
 	}
 
