@@ -19,7 +19,7 @@ public class SagawaGrammerBot implements Chatbot {
 			ZhenMain.println("Apologize");
 		}
 	}
-	//w
+	//we
 	@Override
 	public boolean isTriggered(String userInput) {
 		if (ZhenMain.findKeyword(userInput,  "your",  0) >= 0){
