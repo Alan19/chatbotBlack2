@@ -44,6 +44,7 @@ public class ZhenMain {
 			else if(major.isTriggered(response))
 			{
 				inMainLoop = false;
+				major.talk();
 			}
 			else if (grammar.isTriggered(response)){
 				//Exit while loop
