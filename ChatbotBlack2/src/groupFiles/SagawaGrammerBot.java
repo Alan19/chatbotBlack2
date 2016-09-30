@@ -11,16 +11,27 @@ public class SagawaGrammerBot implements Chatbot {
 	private int grammerCount;
 
 	public SagawaGrammerBot(){
-		helloCount = 0;
-}
+		grammerCount = 0;
+	}
 	
 	public void talk() {
 		
 	}
-
+	//w
 	@Override
 	public boolean isTriggered(String userInput) {
-		// TODO Auto-generated method stub
+		if (ZhenMain.findKeyword(userInput,  "your",  0) >= 0){
+			int yourPsn = ZhenMain.findKeyword(userInput,  "your",  0);
+			String checkStringA = userInput.substring(yourPsn, yourPsn+3);
+			String checkStringThe = userInput.substring(yourPsn, yourPsn+5);
+			String checkStringTheRight = checkStringThe.toLowerCase();
+			if (checkStringA.equals(" a ") || checkStringA.equals(" A ")){
+				return true;
+			}
+			if (checkStringTheRight.equals(" the ")){
+				return true;
+			}
+		}
 		return false;
 	}
 
