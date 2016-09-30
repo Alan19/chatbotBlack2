@@ -41,7 +41,7 @@ public class ZhenMain {
 				println("That's wonderful. So glad you feel good.");
 			}
 
-			else if(ZhenMain.major.isTriggered(response))
+			else if(major.isTriggered(response))
 			{
 				inMainLoop = false;
 			}
@@ -129,10 +129,12 @@ public class ZhenMain {
 	public static void createFields() {
 		input = new Scanner(System.in);
 		user = "";
+		
 		//Initialize group chatbots below
 		grammar = new SagawaGrammerBot();
 		testing = new ZhenTestingBot();
 		college = new AhmedCollege();
+		major = new JaviyMajor();
 	}
 	
 	public static void println(String s){
@@ -168,8 +170,4 @@ public class ZhenMain {
 		return (int) Math.random()*end; 
 	}
 
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'master' of https://github.com/Alan19/chatbotBlack2.git
 }
