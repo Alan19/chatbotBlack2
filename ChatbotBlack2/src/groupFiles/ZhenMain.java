@@ -9,6 +9,7 @@ public class ZhenMain {
 	static String user;
 	static Chatbot testing;
 	static Chatbot grammar;
+	static Chatbot college;
 	
 	//List all the chatbots available under this class
 	
@@ -35,6 +36,10 @@ public class ZhenMain {
 			response = promptInput();
 			if(findKeyword(response, "good", 0) >= 0){
 				println("That's wonderful. So glad you feel good.");
+			}
+			else if (grammar.isTriggered(response)){
+				inMainLoop = false;
+				grammar.talk();
 			}
 			else if(response.indexOf("school") >= 0){
 				println("School is great! Tell me about school.");
@@ -115,7 +120,7 @@ public class ZhenMain {
 		//Initialize group chatbots below
 		grammar = new SagawaGrammerBot();
 		testing = new ZhenTestingBot();
-		
+		college = new AhmedCollege();
 	}
 	
 	public static void println(String s){

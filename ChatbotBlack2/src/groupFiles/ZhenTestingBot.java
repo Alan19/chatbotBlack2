@@ -9,13 +9,13 @@ public class ZhenTestingBot implements Chatbot{
 		inTestingLoop = true;
 		while(inTestingLoop){
 			//Static call on promptInput method from main class
+			ZhenMain.println("Do you need help with your clubs or classes?");
 			ZhenMain.println("Type 'quit' to go back");
 			testingResponse = ZhenMain.promptInput();
 			if(testingResponse.indexOf("quit") >= 0){
 				inTestingLoop = false;
 				ZhenMain.promptForever();
 			}
-			ZhenMain.println("Do you need help with something?");
 		}
 		
 	}
