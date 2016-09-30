@@ -38,16 +38,19 @@ public class ZhenMain {
 				println("That's wonderful. So glad you feel good.");
 			}
 			else if (grammar.isTriggered(response)){
-				inMainLoop = false;
-				grammar.talk();
-			}
-			else if(response.indexOf("school") >= 0){
-				println("School is great! Tell me about school.");
-				
 				//Exit while loop
 				inMainLoop = false;
+				
 				//Go to the school's talk method
+				grammar.talk();
+			}
+			else if(testing.isTriggered(response)){
+				inMainLoop = false;
 				testing.talk();
+			}
+			else if(college.isTriggered(response)){
+				inMainLoop = false;
+				college.talk();
 			}
 			else{
 				println("I don't understand");
