@@ -16,6 +16,11 @@ public class ZhenTestingBot implements Chatbot{
 				inTestingLoop = false;
 				ZhenMain.promptForever();
 			}
+			else if(testingResponse.indexOf("clubs") >= 0){
+				ZhenMain.println("How many semesters until you graduate and how many club credits do you have now?");
+				int[] teams = getClubCredits(2,5);
+				ZhenMain.println("You should join " + teams[0] + " and " + teams[1] + "clubs");
+			}
 		}
 		
 	}
@@ -42,8 +47,8 @@ public class ZhenTestingBot implements Chatbot{
 			teamNumber = remainingCredits / 8;
 			remainingCredits -= teamNumber * 8;
 			regularClubs = remainingCredits + 1;
-			int[] clubTypes = {, };
-			return [];
+			int[] clubTypes = {teamNumber, regularClubs};
+			return clubTypes;
 		}
 	}
 
