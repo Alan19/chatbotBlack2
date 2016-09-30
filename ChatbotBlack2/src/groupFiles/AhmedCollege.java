@@ -17,7 +17,7 @@ public class AhmedCollege implements Chatbot{
 			}
 			else{
 				ZhenMain.println("I'm glad you're so concerned about your future! " +
-						"Tell me about your SAT score first.");
+						"Tell me about your test scores first.");
 			}
 		}
 	}
@@ -31,6 +31,10 @@ public class AhmedCollege implements Chatbot{
 			}
 		}
 		return false;
+	}
+	
+	private String analyzeTestScores(){
+		
 	}
 
 }
