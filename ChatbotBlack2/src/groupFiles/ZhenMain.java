@@ -7,6 +7,7 @@ public class ZhenMain {
 	static boolean inMainLoop;
 	static Scanner input;
 	static String user;
+	static Chatbot major;
 	
 	//List all the chatbots available under this class
 	
@@ -42,6 +43,13 @@ public class ZhenMain {
 //				//Go to the school's talk method
 //				school.talk();
 //			}
+			
+			//Javiy's code from lines 48-
+			else if(ZhenMain.major.isTriggered(response))
+			{
+				inMainLoop = false;
+				major.talk();
+			}
 			else{
 				println("I don't understand");
 			}
@@ -161,4 +169,6 @@ public class ZhenMain {
 			println("Word 1 comes before Word 2");
 		}
 	}
+
+
 }
