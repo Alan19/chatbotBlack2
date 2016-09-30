@@ -30,5 +30,9 @@ public class ZhenTestingBot implements Chatbot{
 		}
 		return false;
 	}
+	private int[] getClubCredits(int years){
+		return null;
+		
+	}
 
 }

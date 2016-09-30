@@ -7,9 +7,12 @@ public class ZhenMain {
 	static boolean inMainLoop;
 	static Scanner input;
 	static String user;
+
+	static Chatbot major;
 	static Chatbot testing;
 	static Chatbot grammar;
 	static Chatbot college;
+
 	
 	//List all the chatbots available under this class
 	
@@ -37,17 +40,26 @@ public class ZhenMain {
 			if(findKeyword(response, "good", 0) >= 0){
 				println("That's wonderful. So glad you feel good.");
 			}
-			else if (grammar.isTriggered(response)){
+
+			else if(major.isTriggered(response))
+			{
 				inMainLoop = false;
-				grammar.talk();
 			}
-			else if(response.indexOf("school") >= 0){
-				println("School is great! Tell me about school.");
-				
+			else if (grammar.isTriggered(response)){
 				//Exit while loop
 				inMainLoop = false;
+				
 				//Go to the school's talk method
+				grammar.talk();
+			}
+			else if(testing.isTriggered(response)){
+				inMainLoop = false;
 				testing.talk();
+			}
+			else if(college.isTriggered(response)){
+				inMainLoop = false;
+				college.talk();
+
 			}
 			else{
 				println("I don't understand");
@@ -102,7 +114,6 @@ public class ZhenMain {
 		if((psn - 6 >= 0) && searchString.substring(psn-6, psn).equals("not ")){
 			return false;
 		}
-		//Check for "not "
 		if((psn - 4 >= 0) && searchString.substring(psn-4, psn).equals("never ")){
 			return false;
 		}
@@ -155,5 +166,6 @@ public class ZhenMain {
 	public static int pickRandomElement(int end){
 		return (int) Math.random()*end; 
 	}
-
 }
+
+
