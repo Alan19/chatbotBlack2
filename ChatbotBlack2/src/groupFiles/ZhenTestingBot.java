@@ -16,10 +16,15 @@ public class ZhenTestingBot implements Chatbot{
 				inTestingLoop = false;
 				ZhenMain.promptForever();
 			}
-			else if(testingResponse.indexOf("clubs") >= 0){
-				ZhenMain.println("How many semesters until you graduate and how many club credits do you have now?");
-				int[] teams = getClubCredits(2,5);
-				ZhenMain.println("You should join " + teams[0] + " and " + teams[1] + "clubs");
+			else if(testingResponse.indexOf("club") >= 0){
+				ZhenMain.println("How many semesters until you graduate?");
+				testingResponse = ZhenMain.promptInput();
+				int remainingSemesters = Integer.parseInt(testingResponse);
+				ZhenMain.println("and how many club credits do you have now?");
+				testingResponse = ZhenMain.promptInput();
+				int currentCredits = Integer.parseInt(testingResponse);
+				int[] teams = getClubCredits(remainingSemesters,currentCredits);
+				ZhenMain.println("You should join " + teams[0] + " teams and " + teams[1] + " clubs");
 			}
 		}
 		
@@ -27,12 +32,9 @@ public class ZhenTestingBot implements Chatbot{
 
 	@Override
 	public boolean isTriggered(String userInput) {
-		String[] triggers = {"homework", "sleep", "studying", "procrastinating", "kill", "unfair", "sexist", "racist", "change classes"};
+		String[] triggers = {"homework", "sleep", "studying", "procrastinating", "kill", "unfair", "sexist", "racist", "change classes", "club"};
 		for(int index = 0; index < triggers.length; index++){
-			System.out.println(triggers[index] + "," + userInput);
-			System.out.println(triggers[index] == userInput);
-			if(triggers[index] == userInput){
-				System.out.println("Hi!");
+			if(userInput.indexOf(triggers[index]) >= 0){
 				return true;
 			}
 		}
@@ -40,6 +42,8 @@ public class ZhenTestingBot implements Chatbot{
 	}
 	private int[] getClubCredits(int semesters, int currentCredits){
 		int remainingCredits = 32-currentCredits;
+		int averageCreditsPerSemester = (int) Math.ceil(remainingCredits / semesters);
+		System.out.println(averageCreditsPerSemester);
 		int teamNumber;
 		int regularClubs;
 		if(remainingCredits <= 0){
@@ -47,9 +51,12 @@ public class ZhenTestingBot implements Chatbot{
 			return clubTypes;
 		}
 		else{
-			teamNumber = remainingCredits / 8;
-			remainingCredits -= teamNumber * 8;
-			regularClubs = remainingCredits + 1;
+			regularClubs = (int) Math.ceil(averageCreditsPerSemester / 4);
+			if(regularClubs > 5){
+				regularClubs = 5;
+			}
+			averageCreditsPerSemester -= regularClubs * 4;
+			teamNumber = (int) Math.ceil(averageCreditsPerSemester / 8);
 			int[] clubTypes = {teamNumber, regularClubs};
 			return clubTypes;
 		}
