@@ -1,6 +1,5 @@
 package groupFiles;
 
-import chatbot.JaviyMain;
 
 public class JaviyMajor extends Object implements Chatbot{
 	

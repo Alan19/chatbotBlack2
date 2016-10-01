@@ -29,7 +29,10 @@ public class ZhenTestingBot implements Chatbot{
 	public boolean isTriggered(String userInput) {
 		String[] triggers = {"homework", "sleep", "studying", "procrastinating", "kill", "unfair", "sexist", "racist", "change classes"};
 		for(int index = 0; index < triggers.length; index++){
+			System.out.println(triggers[index] + "," + userInput);
+			System.out.println(triggers[index] == userInput);
 			if(triggers[index] == userInput){
+				System.out.println("Hi!");
 				return true;
 			}
 		}

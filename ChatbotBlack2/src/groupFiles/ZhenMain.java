@@ -26,21 +26,32 @@ public class ZhenMain {
 		promptForever();
 	}
 	
+	public static void createFields() {
+		input = new Scanner(System.in);
+		user = "";
+		
+		//Initialize group chatbots below
+		grammar = new SagawaGrammerBot();
+		testing = new ZhenTestingBot();
+		college = new AhmedCollege();
+		major = new JaviyMajor();
+	}
+	
 	public static void promptName() {
 		println("Enter your name");
 		user = input.nextLine();
-		println("Glad to meet you " + user + ".For the rest of time, I will always call you " + user + ".You may call me computer. We should become friends.");
+		println("Glad to meet you " + user + ".For the rest of time, I will always call you " + user + ".I am your counselor.");
 	}
 
 	public static void promptForever() {
 		inMainLoop = true;
-		while(true){
-			println("Hi, " + user + ". How are you?");
+		println("Hi, " + user + ". How are you?");
+		while(inMainLoop){
+			println(user + ". Do you need any help? We can discuss talk about clubs, majors, grammar and more!");
 			response = promptInput();
 			if(findKeyword(response, "good", 0) >= 0){
 				println("That's wonderful. So glad you feel good.");
 			}
-
 			else if(major.isTriggered(response))
 			{
 				inMainLoop = false;
@@ -60,10 +71,6 @@ public class ZhenMain {
 			else if(college.isTriggered(response)){
 				inMainLoop = false;
 				college.talk();
-			}
-			else if(major.isTriggered(response)){
-				inMainLoop = false;
-				major.talk();
 			}
 			else{
 				println("I don't understand");
@@ -129,16 +136,6 @@ public class ZhenMain {
 		return userInput;
 	}
 	
-	public static void createFields() {
-		input = new Scanner(System.in);
-		user = "";
-		
-		//Initialize group chatbots below
-		grammar = new SagawaGrammerBot();
-		testing = new ZhenTestingBot();
-		college = new AhmedCollege();
-		major = new JaviyMajor();
-	}
 	
 	public static void println(String s){
 		String printString = "";
