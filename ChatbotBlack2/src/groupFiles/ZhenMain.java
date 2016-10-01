@@ -32,7 +32,7 @@ public class ZhenMain {
 		
 		//Initialize group chatbots below
 		grammar = new SagawaGrammerBot();
-		testing = new ZhenTestingBot();
+		testing = new ZhenClubs();
 		college = new AhmedCollege();
 		major = new JaviyMajor();
 	}

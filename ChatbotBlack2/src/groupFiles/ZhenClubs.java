@@ -1,6 +1,6 @@
 package groupFiles;
 
-public class ZhenTestingBot implements Chatbot{
+public class ZhenClubs implements Chatbot{
 
 	private boolean inTestingLoop;
 	private String testingResponse;
@@ -17,14 +17,7 @@ public class ZhenTestingBot implements Chatbot{
 				ZhenMain.promptForever();
 			}
 			else if(testingResponse.indexOf("club") >= 0){
-				ZhenMain.println("How many semesters until you graduate?");
-				testingResponse = ZhenMain.promptInput();
-				int remainingSemesters = Integer.parseInt(testingResponse);
-				ZhenMain.println("and how many club credits do you have now?");
-				testingResponse = ZhenMain.promptInput();
-				int currentCredits = Integer.parseInt(testingResponse);
-				int[] teams = getClubCredits(remainingSemesters,currentCredits);
-				ZhenMain.println("You should join " + teams[0] + " teams and " + teams[1] + " clubs");
+				ZhenMain.println(clubInfo());				
 			}
 		}
 		
@@ -40,6 +33,19 @@ public class ZhenTestingBot implements Chatbot{
 		}
 		return false;
 	}
+	
+	//Calls club credit algorithm after getting information from user
+	private String clubInfo(){
+		ZhenMain.println("How many semesters until you graduate?");
+		testingResponse = ZhenMain.promptInput();
+		int remainingSemesters = Integer.parseInt(testingResponse);
+		ZhenMain.println("and how many club credits do you have now?");
+		testingResponse = ZhenMain.promptInput();
+		int currentCredits = Integer.parseInt(testingResponse);
+		int[] teams = getClubCredits(remainingSemesters,currentCredits);
+		return "You should join " + teams[0] + " teams and " + teams[1] + " clubs";
+	}
+	
 	private int[] getClubCredits(int semesters, int currentCredits){
 		int remainingCredits = 32-currentCredits;
 		int averageCreditsPerSemester = (int) Math.ceil(remainingCredits / semesters);
