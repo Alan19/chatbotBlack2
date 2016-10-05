@@ -75,6 +75,10 @@ private static Scanner input;
 				,"I bet you don't have any friends","SHUT UP, you lower the IQ of the entire street when you talk"};
 	private static int majorCount;
 	private static int [] studentGrades = {50,55,60,65,70,75,80,85,90,95,96,97,98,99,100};
+	private static int [] yourGrades = {0,0,0,0,0,0};
+	private static String [] subjects = {"Overall","Math","English","Science","Digital Electronics","Social Studies"};
+	private static String gradeResponse;
+	
 	
 	public JaviyMajor(){
 		majorCount = 0;
@@ -141,7 +145,7 @@ private static Scanner input;
 			{
 				basicQuestions(3);
 			}
-			else if(MajorResponse.indexOf("despcrition")>=0)
+			else if(MajorResponse.indexOf("description")>=0)
 			{
 				basicQuestions(4);
 			}
@@ -151,9 +155,24 @@ private static Scanner input;
 				majorCount++;
 			}
 		}
+		//helper method to compare you to other students that want that major
+	
+		private static void findYourMajor() {
+			System.out.println("What are your grades in Math, English, Digital Electronics, Social Studies, Science and Overall Average?");
+			for(int i=0;i < subjects.length;i++){
+				System.out.println("What's your " + subjects[i] + " average?");
+				gradeResponse = ZhenMain.promptInput();
+				int gradeAsInteger = Integer.parseInt(gradeResponse);
+				//method to stop it if integer is greater than 120
+				yourGrades[i] = gradeAsInteger;
+				System.out.println(subjects[i] + yourGrades[i]);
+			}
+		}
 	private static void getChanceOfMajor() {
 		//String []gradeArray = {"0","0","0","0","0","0"};
 		//System.out.println("What are your grades in Math, English, Digital Electronics, Social Studies, Science and Overall Average?");
+		//helper method to get all the grades you want
+		findYourMajor();
 		int [] students = {150};
 		for(int i=0;i<students.length-1;i++){
 		int randomGrade = (int) (Math.random()*studentGrades.length);
@@ -225,9 +244,6 @@ private static Scanner input;
 		
 	}
 
-
-	//helper method to compare you to other students that want that major
-	
 	private void majorDoesntExist() {
 		majorCount++;
 		if(majorCount>=10){

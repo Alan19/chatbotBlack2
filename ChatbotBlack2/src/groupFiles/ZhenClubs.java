@@ -23,6 +23,9 @@ public class ZhenClubs implements Chatbot{
 			else if(testingResponse.indexOf("club") >= 0){
 				ZhenMain.println(clubInfo());				
 			}
+			else if(testingResponse.indexOf("class") >= 0){
+				ZhenMain.println(classInfo());
+			}
 			else if(calmCounter <= 5){
 				ZhenMain.println(calmResponse[ZhenMain.pickRandomElement(calmResponse.length)]);
 				calmCounter += 1;
@@ -31,12 +34,17 @@ public class ZhenClubs implements Chatbot{
 				ZhenMain.println(angryResponse[ZhenMain.pickRandomElement(angryResponse.length)]);
 			}
 		}
-		
+
+	}
+
+	private String classInfo() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public boolean isTriggered(String userInput) {
-		String[] triggers = {"homework", "sleep", "studying", "procrastinating", "kill", "unfair", "sexist", "racist", "change classes", "club"};
+		String[] triggers = {"sleep", "studying", "procrastinating", "kill", "unfair", "sexist", "racist", "change classes", "club"};
 		for(int index = 0; index < triggers.length; index++){
 			if(userInput.indexOf(triggers[index]) >= 0){
 				return true;
@@ -44,28 +52,50 @@ public class ZhenClubs implements Chatbot{
 		}
 		return false;
 	}
-	
+
+	private static int getIntegerInput() {
+		ZhenMain.println("Please enter an integer.");
+		String integerString = ZhenMain.promptInput();
+		boolean isInteger = false;
+		int value = 0;
+		while(!isInteger){
+			try{
+				value = Integer.parseInt(integerString);
+				//will not continue if an error above is thrown
+				isInteger = true;//exits loop if entry is valid
+			}catch(NumberFormatException e){
+				ZhenMain.println("You must enter an integer. You better try again.");
+				integerString = ZhenMain.promptInput();
+			}
+		}
+		return value;
+	}
+
 	//Calls club credit algorithm after getting information from user
 	private String clubInfo(){
 		ZhenMain.println("How many semesters until you graduate?");
-		testingResponse = ZhenMain.promptInput();
-		int remainingSemesters = Integer.parseInt(testingResponse);
-		ZhenMain.println("and how many club credits do you have now?");
-		testingResponse = ZhenMain.promptInput();
-		int currentCredits = Integer.parseInt(testingResponse);
-		int[] teams = getClubCredits(remainingSemesters,currentCredits);
-		return "You should join " + teams[0] + " teams and " + teams[1] + " clubs";
+		int remainingSemesters = getIntegerInput();
+		ZhenMain.println("How many club credits do you have now?");
+		int currentCredits = getIntegerInput();
+		return getClubCredits(remainingSemesters,currentCredits);
 	}
-	
-	private int[] getClubCredits(int semesters, int currentCredits){
+
+	private String checkPlurality(String word, int number) {
+		if(number == 1){
+			return word;
+		}
+		else{
+			return word + "s";
+		}
+	}
+
+	private String getClubCredits(int semesters, int currentCredits){
 		int remainingCredits = 32-currentCredits;
 		int averageCreditsPerSemester = (int) Math.ceil(remainingCredits / semesters);
-		System.out.println(averageCreditsPerSemester);
 		int teamNumber;
 		int regularClubs;
 		if(remainingCredits <= 0){
-			int[] clubTypes = {0, 0};
-			return clubTypes;
+			return "You don't have to join any clubs this year. However, it's never bad to spend time with students after class if you have the time!";
 		}
 		else{
 			regularClubs = (int) Math.ceil(averageCreditsPerSemester / 4);
@@ -75,7 +105,7 @@ public class ZhenClubs implements Chatbot{
 			averageCreditsPerSemester -= regularClubs * 4;
 			teamNumber = (int) Math.ceil(averageCreditsPerSemester / 8);
 			int[] clubTypes = {teamNumber, regularClubs};
-			return clubTypes;
+			return "You should join " + clubTypes[0] + " " + checkPlurality("team", clubTypes[0]) + " and " + clubTypes[1] + " " + checkPlurality("club", clubTypes[1]) + " this year.";
 		}
 	}
 
