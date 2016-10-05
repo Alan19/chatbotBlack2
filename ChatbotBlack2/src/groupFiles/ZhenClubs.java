@@ -4,8 +4,12 @@ public class ZhenClubs implements Chatbot{
 
 	private boolean inTestingLoop;
 	private String testingResponse;
+	private int calmCounter;
+	private String[] calmResponse = {"I don't understand what you mean.", "I can help you with clubs but maybe you need something else.", "I can't do anything if I don't know what you're saying."};
+	private String[] angryResponse = {"Don't you have something better to do?", "You won't be able to stay in a club or team if you act like this."};
 	@Override
 	public void talk() {
+		calmCounter = 0;
 		inTestingLoop = true;
 		while(inTestingLoop){
 			//Static call on promptInput method from main class
@@ -18,6 +22,13 @@ public class ZhenClubs implements Chatbot{
 			}
 			else if(testingResponse.indexOf("club") >= 0){
 				ZhenMain.println(clubInfo());				
+			}
+			else if(calmCounter <= 5){
+				ZhenMain.println(calmResponse[ZhenMain.pickRandomElement(calmResponse.length)]);
+				calmCounter += 1;
+			}
+			else{
+				ZhenMain.println(angryResponse[ZhenMain.pickRandomElement(angryResponse.length)]);
 			}
 		}
 		
