@@ -38,7 +38,7 @@ public class ZhenClubs implements Chatbot{
 	}
 
 	private String classInfo() {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
