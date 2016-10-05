@@ -167,6 +167,7 @@ public class ZhenMain {
 	}
 	
 	public static int pickRandomElement(int end){
+		//Returns an integer from [0,end) (end not included, use for array length)
 		return (int) Math.random()*end; 
 	}
 
