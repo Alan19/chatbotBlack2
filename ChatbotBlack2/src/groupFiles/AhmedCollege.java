@@ -132,9 +132,9 @@ private boolean inCollegeLoop;
 			inCollegeLoop = false;	
 			ZhenMain.grammar.talk();
 		}
-		else if(ZhenMain.clubs.isTriggered(input)){
+		else if(ZhenMain.testing.isTriggered(input)){
 			inCollegeLoop = false;
-			ZhenMain.clubs.talk();
+			ZhenMain.testing.talk();
 		}
 	}
 
