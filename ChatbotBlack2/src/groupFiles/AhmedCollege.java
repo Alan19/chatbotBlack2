@@ -11,6 +11,10 @@ private boolean inCollegeLoop;
 	private String[] scoreCompliments = {"Hey, that's pretty good!", "Wow, are you Einstein's reincarnate?", "Neat!", "Cool beans!"};
 	private String[] scoreIndifferents = {"That aiiii.", "Hmm.", "That's okay I guess", "Wow, that's an A for average."};
 	
+	private String[] reachSchools = {"Harvard", "Yale", "MIT"};//each school type will have grade requirements
+	private String[] matchSchools = {"Stonybrook", "", ""};
+	private String[] safetySchools = {"", "", ""};
+	
 	//idea: have bot ask what college the user wants to attend, if not in array
 	//add it by asking if it a reach, match, or safety
 	public void talk() { 
