@@ -7,6 +7,7 @@ public class ZhenClubs implements Chatbot{
 	private int calmCounter;
 	private String[] calmResponse = {"I don't understand what you mean.", "I can help you with clubs but maybe you need something else.", "I can't do anything if I don't know what you're saying."};
 	private String[] angryResponse = {"Don't you have something better to do?", "You won't be able to stay in a club or team if you act like this."};
+	
 	@Override
 	public void talk() {
 		calmCounter = 0;
@@ -16,14 +17,14 @@ public class ZhenClubs implements Chatbot{
 			ZhenMain.println("Do you need help with your clubs or classes?");
 			ZhenMain.println("Type 'quit' to go back");
 			testingResponse = ZhenMain.promptInput();
-			if(testingResponse.indexOf("quit") >= 0){
+			if(ZhenMain.findKeyword(testingResponse, "quit", 0) >= 0){
 				inTestingLoop = false;
 				ZhenMain.promptForever();
 			}
-			else if(testingResponse.indexOf("club") >= 0){
+			else if(ZhenMain.findKeyword(testingResponse, "club", 0) >= 0){
 				ZhenMain.println(clubInfo());				
 			}
-			else if(testingResponse.indexOf("class") >= 0){
+			else if(ZhenMain.findKeyword(testingResponse, "class", 0) >= 0){
 				ZhenMain.println(classInfo());
 			}
 			else if(calmCounter <= 5){
@@ -60,12 +61,18 @@ public class ZhenClubs implements Chatbot{
 				return angryResponse[ZhenMain.pickRandomElement(angryResponse.length)];
 			}
 		}
-		return null;
+		if(calmCounter <= 5){
+			calmCounter += 1;
+			return calmResponse[ZhenMain.pickRandomElement(calmResponse.length)];
+		}
+		else{
+			return angryResponse[ZhenMain.pickRandomElement(angryResponse.length)];
+		}
 	}
 
 	@Override
 	public boolean isTriggered(String userInput) {
-		String[] triggers = {"sleep", "studying", "procrastinating", "kill", "unfair", "sexist", "racist", "change classes", "club"};
+		String[] triggers = {"classes", "club", "credits", "electives", "diploma"};
 		for(int index = 0; index < triggers.length; index++){
 			if(ZhenMain.findKeyword(userInput, triggers[index], 0) >= 0){
 				return true;
