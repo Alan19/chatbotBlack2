@@ -11,7 +11,7 @@ private boolean inCollegeLoop;
 	private String[] scoreInsults = {"That low?", "May I suggest Clown College?", "I hope you have some sort of talent to compensate.", "You ever see those get rich quick ads? Take up their offer."};
 	private String[] scoreCompliments = {"Hey, that's pretty good!", "Wow, are you Einstein's reincarnate?", "Neat!", "Cool beans!"};
 	private String[] scoreIndifferents = {"That aiiii.", "Hmm.", "That's okay I guess", "Wow, that's an A for average."};
-	private String[] scoreImpossible = {"There's no need to lie to "};
+	private String[] scoreImpossible = {"There's no need to lie to protect your fragile ego.", ""};
 	
 	private String[] impatientResponses = {"Cmon now, let's cooperate.", ""};
 	
@@ -21,12 +21,16 @@ private boolean inCollegeLoop;
 	
 	//idea: have bot ask what college the user wants to attend, if not in array
 	//add it by asking if it a reach, match, or safety
-	public void talk() { 
+	public void talk(){
 		inCollegeLoop = true;
-		ZhenMain.println("I'm glad you're concerned about college. Let's start with your standardized test scores.");
+		ZhenMain.println("I'm glad you're concerned about college!!!!11!!one!!");
 		while(inCollegeLoop){
+			ZhenMain.println("What would you like to know about college?");
 			collegeResponse = ZhenMain.promptInput();
-			scoreResponse(collegeResponse);
+			if(ZhenMain.findKeyword(collegeResponse, "colleges", 0) >= 0)
+				scoreResponse(collegeResponse);
+			if(ZhenMain.findKeyword(collegeResponse, "test", 0) >= 0)
+				scoreResponse(collegeResponse);
 		}
 	}
 	
@@ -37,7 +41,7 @@ private boolean inCollegeLoop;
 				int responseIndex = (int)(Math.random()*scoreInsults.length);
 				ZhenMain.println(scoreInsults[responseIndex]);
 			}
-			else if(testScore >= 30 && testScore <=33){
+			else if(testScore >= 30 && testScore <= 33){
 				int responseIndex = (int)(Math.random()*scoreIndifferents.length);
 				ZhenMain.println(scoreIndifferents[responseIndex]);
 			}
@@ -110,12 +114,29 @@ private boolean inCollegeLoop;
 	}
 
 	public boolean isTriggered(String userInput) {
-		String[] triggers = {"college", "my future", "university"};
+		String[] triggers = {"college", "my future", "university", "sat", "act"};
 		for(int i=0; i<triggers.length; i++){
 			if(ZhenMain.findKeyword(userInput, triggers[i], 0) >= 0)
 				return true;
 		}
 		return false;
 	}
+	
+	private void checkOtherTriggers(String input){
+		if(ZhenMain.major.isTriggered(input))
+		{
+			inCollegeLoop = false;
+			ZhenMain.major.talk();
+		}
+		else if (ZhenMain.grammar.isTriggered(input)){
+			inCollegeLoop = false;	
+			ZhenMain.grammar.talk();
+		}
+		else if(ZhenMain.clubs.isTriggered(input)){
+			inCollegeLoop = false;
+			ZhenMain.clubs.talk();
+		}
+	}
+
 
 }
