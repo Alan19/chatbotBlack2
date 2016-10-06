@@ -21,7 +21,7 @@ public class ZhenClubs implements Chatbot{
 				inTestingLoop = false;
 				ZhenMain.promptForever();
 			}
-			else if(ZhenMain.findKeyword(testingResponse, "club", 0) >= 0){
+			else if(ZhenMain.findKeyword(testingResponse, "clubs", 0) >= 0 || ZhenMain.findKeyword(testingResponse, "credits", 0) >= 0){
 				ZhenMain.println(clubInfo());				
 			}
 			else if(ZhenMain.findKeyword(testingResponse, "class", 0) >= 0){

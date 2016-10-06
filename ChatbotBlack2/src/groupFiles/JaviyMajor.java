@@ -165,21 +165,29 @@ public class JaviyMajor extends Object implements Chatbot{
 				 }
 				 	
 				 }
-				 	yourGrades[i] = integerString;
-				 	System.out.println(subjects[i] + yourGrades[i]);
-				 }
+ 			 	 if(Integer.parseInt(integerString)>105){
+				 		yourGrades[i] = "105";
+				 	}else if(Integer.parseInt(integerString)<0){
+				 		yourGrades[i] = "0";
+				 	}else if(Integer.parseInt(integerString)<105 && Integer.parseInt(integerString)>0){
+				 		yourGrades[i] = integerString;
+				 	}
+			 }
 				
-			}
+		}
 		
 	private static void getChanceOfMajor() {
 		//String []gradeArray = {"0","0","0","0","0","0"};
 		//System.out.println("What are your grades in Math, English, Digital Electronics, Social Studies, Science and Overall Average?");
 		//helper method to get all the grades you want
 		findYourMajor();
-		int [] students = {150};
+		int [] students = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+				0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+				0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+				0,0,0,0,0,0,0,0,0,0};
 		for(int i=0;i<students.length-1;i++){
 		int randomGrade = (int) (Math.random()*studentGrades.length);
-		students[i] = studentGrades[randomGrade];
+		students[i] = students[i] + studentGrades[randomGrade];
 		}
 		if(ZhenMain.findKeyword(MajorResponse,"software",0)>=0){
 			int softwarePowerIndex = (Integer.parseInt(yourGrades[0])+Integer.parseInt(yourGrades[1])+Integer.parseInt(yourGrades[3])+Integer.parseInt(yourGrades[3]))/4;

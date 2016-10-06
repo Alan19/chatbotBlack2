@@ -139,7 +139,7 @@ public class ZhenMain {
 	
 	public static void println(String s){
 		String printString = "";
-		int cutoff = 500;
+		int cutoff = 150;
 		//Check for words to add or s has a length > 0
 		while(s.length() > 0){
 			String cut = "";
