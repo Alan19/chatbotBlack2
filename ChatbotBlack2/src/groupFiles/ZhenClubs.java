@@ -17,11 +17,8 @@ public class ZhenClubs implements Chatbot{
 			ZhenMain.println("Do you need help with your clubs or classes?");
 			ZhenMain.println("Type 'quit' to go back");
 			testingResponse = ZhenMain.promptInput();
-			if(ZhenMain.findKeyword(testingResponse, "quit", 0) >= 0){
-				inTestingLoop = false;
-				ZhenMain.promptForever();
-			}
-			else if(ZhenMain.findKeyword(testingResponse, "clubs", 0) >= 0 || ZhenMain.findKeyword(testingResponse, "credits", 0) >= 0){
+			checkOtherTriggers(testingResponse);
+			if(ZhenMain.findKeyword(testingResponse, "clubs", 0) >= 0 || ZhenMain.findKeyword(testingResponse, "credits", 0) >= 0){
 				ZhenMain.println(clubInfo());				
 			}
 			else if(ZhenMain.findKeyword(testingResponse, "class", 0) >= 0){
@@ -144,6 +141,25 @@ public class ZhenClubs implements Chatbot{
 				regularClubs = (int) Math.ceil(averageCreditsPerSemester / 4);
 				return "You should join " + regularClubs + " " + checkPlurality(" club", regularClubs) + " this year.";
 			}
+		}
+	}
+	
+	private void checkOtherTriggers(String input){
+		if(JaviyMajor.isTriggered(input))
+		{
+			inTestingLoop = false;
+			JaviyMajor.talk();
+		}
+		else if (SagawaGrammerBot.isTriggered(input)){
+			//Exit while loop
+			inTestingLoop = false;
+			println("debug");
+			//Go to the school's talk method
+			SagawaGrammerBot.talk();
+		}
+		else if(AhmedCollege.isTriggered(input)){
+			inTestingLoop = false;
+			AhmedCollege.talk();
 		}
 	}
 

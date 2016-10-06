@@ -60,7 +60,6 @@ public class ZhenMain {
 			else if (grammar.isTriggered(response)){
 				//Exit while loop
 				inMainLoop = false;
-				println("debug");
 				//Go to the school's talk method
 				grammar.talk();
 			}
