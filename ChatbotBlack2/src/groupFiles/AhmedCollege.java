@@ -4,61 +4,67 @@ public class AhmedCollege implements Chatbot{
 	
 private boolean inCollegeLoop;
 	private String collegeResponse;
-	private int testScore;
-	private int average;
+	private int testScore = 0;
+	private int average = 0;
+	private String testTaken;
 	
 	private String[] scoreInsults = {"That low?", "May I suggest Clown College?", "I hope you have some sort of talent to compensate.", "You ever see those get rich quick ads? Take up their offer."};
 	private String[] scoreCompliments = {"Hey, that's pretty good!", "Wow, are you Einstein's reincarnate?", "Neat!", "Cool beans!"};
 	private String[] scoreIndifferents = {"That aiiii.", "Hmm.", "That's okay I guess", "Wow, that's an A for average."};
+	private String[] scoreImpossible = {"There's no need to lie to "};
+	
+	private String[] impatientResponses = {"Cmon now, let's cooperate.", ""};
 	
 	private String[] reachSchools = {"Harvard", "Yale", "MIT"};//each school type will have grade requirements
-	private String[] matchSchools = {"Stonybrook", "", ""};
-	private String[] safetySchools = {"", "", ""};
+	private String[] matchSchools = {"Stonybrook", "Match University", "Just Right School"};
+	private String[] safetySchools = {"Community College", "ITT Tech", "School for the Safe and Talented"};
 	
 	//idea: have bot ask what college the user wants to attend, if not in array
 	//add it by asking if it a reach, match, or safety
 	public void talk() { 
 		inCollegeLoop = true;
-		AhmedMain.print("I'm glad you're concerned about college. Let's start off by telling me your standardized test scores.");
+		ZhenMain.println("I'm glad you're concerned about college. Let's start with your standardized test scores.");
 		while(inCollegeLoop){
-			collegeResponse = AhmedMain.promptInput();
+			collegeResponse = ZhenMain.promptInput();
 			scoreResponse(collegeResponse);
 		}
 	}
 	
 	private void scoreResponse(String input){ //could be condensed/abstracted
-		testScore = getTestScore(input);
-		System.out.println(testScore); //change test score upon asking for which test
-		if(AhmedMain.findKeyword(input, "ACT", 0) >= 0){
+		testScore = getTestScore(collegeResponse);
+		if(ZhenMain.findKeyword(input, "ACT", 0) >= 0 && testScore > -1){
 			if(testScore < 30){
 				int responseIndex = (int)(Math.random()*scoreInsults.length);
-				AhmedMain.print(scoreInsults[responseIndex]);
+				ZhenMain.println(scoreInsults[responseIndex]);
 			}
 			else if(testScore >= 30 && testScore <=33){
 				int responseIndex = (int)(Math.random()*scoreIndifferents.length);
-				AhmedMain.print(scoreIndifferents[responseIndex]);
+				ZhenMain.println(scoreIndifferents[responseIndex]);
 			}
 			else{
 				int responseIndex = (int)(Math.random()*scoreCompliments.length);
-				AhmedMain.print(scoreCompliments[responseIndex]);
+				ZhenMain.println(scoreCompliments[responseIndex]);
 			}
 		}
-		else if(AhmedMain.findKeyword(input, "SAT", 0) >= 0){
+		else if(ZhenMain.findKeyword(input, "SAT", 0) >= 0 && testScore > -1){
 			if(testScore < 1150){
 				int responseIndex = (int)(Math.random()*scoreInsults.length);
-				AhmedMain.print(scoreInsults[responseIndex]);
+				ZhenMain.println(scoreInsults[responseIndex]);
 			}
 			else if(testScore >= 1150 && testScore <= 1480){
 				int responseIndex = (int)(Math.random()*scoreIndifferents.length);
-				AhmedMain.print(scoreIndifferents[responseIndex]);
+				ZhenMain.println(scoreIndifferents[responseIndex]);
 			}
 			else{
 				int responseIndex = (int)(Math.random()*scoreCompliments.length);
-				AhmedMain.print(scoreCompliments[responseIndex]);
+				ZhenMain.println(scoreCompliments[responseIndex]);
 			}
 		}
 		else{
-			AhmedMain.print("Which test?"); //needs refining
+			ZhenMain.println("Which test?");
+			collegeResponse = ZhenMain.promptInput();
+			testTaken = collegeResponse;
+			scoreResponse(testTaken);
 		}
 	}
 	
@@ -87,7 +93,7 @@ private boolean inCollegeLoop;
 			String parsedInput = currentInput.substring(scorePos);
 			
 			for(int i=0; i<punctuationArr.length; i++){
-				if(AhmedMain.findKeyword(parsedInput, punctuationArr[i], 0) >= 0){
+				if(ZhenMain.findKeyword(parsedInput, punctuationArr[i], 0) >= 0){
 					punctuationIndex = parsedInput.indexOf(punctuationArr[i]);
 					break;
 				}
@@ -106,9 +112,10 @@ private boolean inCollegeLoop;
 	public boolean isTriggered(String userInput) {
 		String[] triggers = {"college", "my future", "university"};
 		for(int i=0; i<triggers.length; i++){
-			if(AhmedMain.findKeyword(userInput, triggers[i], 0) >= 0)
+			if(ZhenMain.findKeyword(userInput, triggers[i], 0) >= 0)
 				return true;
 		}
 		return false;
 	}
+
 }
