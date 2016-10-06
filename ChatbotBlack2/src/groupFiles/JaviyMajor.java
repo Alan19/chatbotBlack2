@@ -82,7 +82,7 @@ public class JaviyMajor extends Object implements Chatbot{
 		while(inMajorLoop){
 			//static call on promptInputmethod from JaviyMain
 			MajorResponse = ZhenMain.promptInput();
-
+			checkOtherTriggers(MajorResponse);
 			//Create helper method to make you exit out if you try to search for a major other than the ones listed
 			if(MajorResponse.indexOf("quit")>=0){
 				inMajorLoop = false;
@@ -300,6 +300,24 @@ public class JaviyMajor extends Object implements Chatbot{
 		}
 	}
 		return false;
+	}
+	private void checkOtherTriggers(String input){
+//		if(ZhenMain.clubs.isTriggered(input))
+//		{
+//			inMajorLoop = false;
+//			ZhenMain.println("...*sigh*...");
+//			ZhenMain.clubs.talk();
+//		}
+		if (ZhenMain.grammar.isTriggered(input)){
+			inMajorLoop = false;	
+			ZhenMain.println("...*sigh*...");
+			ZhenMain.grammar.talk();
+		}
+		else if(ZhenMain.college.isTriggered(input)){
+			inMajorLoop = false;
+			ZhenMain.println("...*sigh*...");
+			ZhenMain.college.talk();
+		}
 	}
 	
 
