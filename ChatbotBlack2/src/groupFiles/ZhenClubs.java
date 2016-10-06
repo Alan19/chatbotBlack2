@@ -38,7 +38,27 @@ public class ZhenClubs implements Chatbot{
 	}
 
 	private String classInfo() {
+		String environmental = "The goal of the AP Environmental Science Course is to provide students with the scientific principles, concepts, and methodologies required to understand the inter-relationships of the natural world, to identify and analyze environmental problems both natural and human-made, to evaluate the relative risks associated with these problems, and to examine alternative solutions for resolving or preventing them.";
+		String forensics = "This course will teach you about the Crime Scene, Physical Evidence, Physical Properties: Glass and Soil, Organic Analysis, Inorganic Analysis, The Microscope, Hairs, Fibers and Paint, Drugs, Forensic Technology, Forensic Aspects of Arson and Explosion Investigations, Forensic Serology, DNA: The Indispensable Forensic Science Tool, Fingerprints, Firearms, Tool Marks, Document and Voice Examination, Computer Forensics, Forensic Science and the Internet, and the future of forensic criminology";
+		String java = "This course is an introduction Object Oriented programming using JAVA as a platform. In addition to the basic tools of programming, the course consists of Object Oriented Program Design, Program Implementation, Program Analysis, Standard Data Structures, Standard Algorithms, and Computing in Context.";
+		String calculus = "This course extends the ideas and techniques of single-variable Calculus into multi-dimensional space.Understanding functions of several variables through geometric and analytic means will be emphasized, and the techniques in the calculus of multi-variable functions will be developed. In addition, the calculus of parametric and vector-valued functions will be explored.";
 		
+		String[] courseDescription = {environmental, forensics, java, calculus};
+		String[] triggerWords = {"environmental", "forensics", "java", "multivariable calculus"};
+		ZhenMain.println("Brooklyn Tech offers many electives. Some of the electives offered are AP Environmental Science, Forensics, Multivariable Calculus, and AP Java. Which course do you wish to learn about?");
+		testingResponse = ZhenMain.promptInput();
+		for(int i = 0; i <= triggerWords.length; i++){
+			if(ZhenMain.findKeyword(testingResponse, triggerWords[i], 0) >= 0){
+				return courseDescription[i];
+			}
+			else if(calmCounter <= 5){
+				calmCounter += 1;
+				return calmResponse[ZhenMain.pickRandomElement(calmResponse.length)];
+			}
+			else{
+				return angryResponse[ZhenMain.pickRandomElement(angryResponse.length)];
+			}
+		}
 		return null;
 	}
 
@@ -46,7 +66,7 @@ public class ZhenClubs implements Chatbot{
 	public boolean isTriggered(String userInput) {
 		String[] triggers = {"sleep", "studying", "procrastinating", "kill", "unfair", "sexist", "racist", "change classes", "club"};
 		for(int index = 0; index < triggers.length; index++){
-			if(userInput.indexOf(triggers[index]) >= 0){
+			if(ZhenMain.findKeyword(userInput, triggers[index], 0) >= 0){
 				return true;
 			}
 		}
@@ -98,14 +118,24 @@ public class ZhenClubs implements Chatbot{
 			return "You don't have to join any clubs this year. However, it's never bad to spend time with students after class if you have the time!";
 		}
 		else{
-			regularClubs = (int) Math.ceil(averageCreditsPerSemester / 4);
-			if(regularClubs > 5){
-				regularClubs = 5;
+			if(averageCreditsPerSemester >= 8){
+				teamNumber = (int) Math.floor(averageCreditsPerSemester / 8);
+				averageCreditsPerSemester -= (8 * teamNumber);
+				regularClubs = (int) Math.ceil(averageCreditsPerSemester / 4);
+				int[] clubTypes = {teamNumber, regularClubs};
+				//Recommends joining a team if credits are really needed, otherwise, recommends more clubs
+				if(regularClubs >= 1){
+					return "You should join " + clubTypes[0] + checkPlurality(" team", clubTypes[0]) + " and " + clubTypes[1] + checkPlurality(" club", clubTypes[1]) + " this year.";					
+				}
+				else{
+					return "You should join " + regularClubs + " " + checkPlurality(" club", regularClubs) + " this year.";
+				}
 			}
-			averageCreditsPerSemester -= regularClubs * 4;
-			teamNumber = (int) Math.ceil(averageCreditsPerSemester / 8);
-			int[] clubTypes = {teamNumber, regularClubs};
-			return "You should join " + clubTypes[0] + " " + checkPlurality("team", clubTypes[0]) + " and " + clubTypes[1] + " " + checkPlurality("club", clubTypes[1]) + " this year.";
+			
+			else{
+				regularClubs = (int) Math.ceil(averageCreditsPerSemester / 4);
+				return "You should join " + regularClubs + " " + checkPlurality(" club", regularClubs) + " this year.";
+			}
 		}
 	}
 
