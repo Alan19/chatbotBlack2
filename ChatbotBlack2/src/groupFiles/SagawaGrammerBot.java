@@ -41,11 +41,11 @@ public class SagawaGrammerBot implements Chatbot {
 			String checkStringA = userInput.substring(yourPsn, yourPsn+3);
 			String checkStringThe = userInput.substring(yourPsn, yourPsn+5);
 			if (checkStringA.equals(" a ") || checkStringA.equals(" A ")){
-				//ZhenMain.println(errorFragment(userInput));
+				ZhenMain.println(errorFragment(userInput));
 				return true;
 			}
 			if (checkStringThe.toLowerCase().equals(" the ")){
-				//ZhenMain.println(errorFragment(userInput));
+				ZhenMain.println(errorFragment(userInput));
 				return true;
 			}
 		}
@@ -89,10 +89,10 @@ public class SagawaGrammerBot implements Chatbot {
 			ZhenMain.println("...*sigh*...");
 			ZhenMain.major.talk();
 		}
-		else if (ZhenMain.grammar.isTriggered(input)){
+		else if (ZhenMain.testing.isTriggered(input)){
 			inGrammerLoop = false;	
 			ZhenMain.println("...*sigh*...");
-			ZhenMain.grammar.talk();
+			ZhenMain.testing.talk();
 		}
 		else if(ZhenMain.college.isTriggered(input)){
 			inGrammerLoop = false;
