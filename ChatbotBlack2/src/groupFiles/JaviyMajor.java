@@ -290,7 +290,7 @@ public class JaviyMajor extends Object implements Chatbot{
 
 
 	public boolean isTriggered(String userInput) {
-		String[] triggers = {"majors","software","media","finance"
+		String[] triggers = {"majors?","majors","software","media","finance"
 				,"college prep","chemistry","bioScience","major"};
 		//create a for loop to iterate
 		//through your array of triggers

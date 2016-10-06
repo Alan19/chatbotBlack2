@@ -17,14 +17,14 @@ public class SagawaGrammerBot implements Chatbot {
 		grammerCount = 0;
 		while(inGrammerLoop){
 			grammerResponse = ZhenMain.promptInput();
+			checkOtherTriggers(grammerResponse);
 			int lowerCase = ZhenMain.findKeyword(grammerResponse,  "sorry", 0);
-			ZhenMain.println(""+lowerCase);
+			ZhenMain.println(escalatingResponses[grammerCount]);
 			if((lowerCase >= 0 && noNegations(grammerResponse, lowerCase))){
 				ZhenMain.println("Apology accepted.");
 				inGrammerLoop = false;
 				ZhenMain.promptForever();
 			}
-			ZhenMain.println(escalatingResponses[grammerCount]);
 			if (grammerCount < 5){
 				grammerCount++;
 			}
@@ -41,11 +41,11 @@ public class SagawaGrammerBot implements Chatbot {
 			String checkStringA = userInput.substring(yourPsn, yourPsn+3);
 			String checkStringThe = userInput.substring(yourPsn, yourPsn+5);
 			if (checkStringA.equals(" a ") || checkStringA.equals(" A ")){
-				//ZhenMain.println(errorFragment(userInput));
+				ZhenMain.println(errorFragment(userInput));
 				return true;
 			}
 			if (checkStringThe.toLowerCase().equals(" the ")){
-				//ZhenMain.println(errorFragment(userInput));
+				ZhenMain.println(errorFragment(userInput));
 				return true;
 			}
 		}
@@ -80,6 +80,25 @@ public class SagawaGrammerBot implements Chatbot {
 			return false;
 		}
 		return true;
+	}
+	
+	private void checkOtherTriggers(String input){
+		if(ZhenMain.major.isTriggered(input))
+		{
+			inGrammerLoop = false;
+			ZhenMain.println("...*sigh*...");
+			ZhenMain.major.talk();
+		}
+		else if (ZhenMain.testing.isTriggered(input)){
+			inGrammerLoop = false;	
+			ZhenMain.println("...*sigh*...");
+			ZhenMain.testing.talk();
+		}
+		else if(ZhenMain.college.isTriggered(input)){
+			inGrammerLoop = false;
+			ZhenMain.println("...*sigh*...");
+			ZhenMain.college.talk();
+		}
 	}
 
 }
