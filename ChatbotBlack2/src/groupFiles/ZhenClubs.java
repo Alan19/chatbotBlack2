@@ -37,6 +37,7 @@ public class ZhenClubs implements Chatbot{
 
 	}
 
+	@SuppressWarnings("unused")
 	private String classInfo() {
 		String environmental = "The goal of the AP Environmental Science Course is to provide students with the scientific principles, concepts, and methodologies required to understand the inter-relationships of the natural world, to identify and analyze environmental problems both natural and human-made, to evaluate the relative risks associated with these problems, and to examine alternative solutions for resolving or preventing them.";
 		String forensics = "This course will teach you about the Crime Scene, Physical Evidence, Physical Properties: Glass and Soil, Organic Analysis, Inorganic Analysis, The Microscope, Hairs, Fibers and Paint, Drugs, Forensic Technology, Forensic Aspects of Arson and Explosion Investigations, Forensic Serology, DNA: The Indispensable Forensic Science Tool, Fingerprints, Firearms, Tool Marks, Document and Voice Examination, Computer Forensics, Forensic Science and the Internet, and the future of forensic criminology";
