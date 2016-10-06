@@ -105,7 +105,7 @@ public class ZhenClubs implements Chatbot{
 	}
 	
 	private static int getIntegerInput() {
-		ZhenMain.println("Please enter an integer.");
+		ZhenMain.println("Please enter an non-negative integer.");
 		String integerString = ZhenMain.promptInput();
 		boolean isInteger = false;
 		boolean isPositive =false;
@@ -117,7 +117,7 @@ public class ZhenClubs implements Chatbot{
 				isInteger = true;//exits loop if entry is valid
 				if(value < 0){
 					isPositive = false;
-					ZhenMain.println("You must enter a nonzero integer.");
+					ZhenMain.println("You must enter an non-negative integer.");
 					integerString = ZhenMain.promptInput();
 				}
 				else{
