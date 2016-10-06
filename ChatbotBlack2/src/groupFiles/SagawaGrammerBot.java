@@ -17,6 +17,7 @@ public class SagawaGrammerBot implements Chatbot {
 		grammerCount = 0;
 		while(inGrammerLoop){
 			grammerResponse = ZhenMain.promptInput();
+			checkOtherTriggers(grammerResponse);
 			int lowerCase = ZhenMain.findKeyword(grammerResponse,  "sorry", 0);
 			ZhenMain.println(escalatingResponses[grammerCount]);
 			if((lowerCase >= 0 && noNegations(grammerResponse, lowerCase))){
