@@ -97,7 +97,7 @@ public class ZhenMain {
 			}
 			//Check if there is a character after the keyword
 			if(psn + keyword.length() < searchString.length()){
-				after = searchString.substring(psn =  keyword.length(), psn + keyword.length() + 1);
+				after = searchString.substring(psn + keyword.length(), psn + keyword.length() + 1);
 				//System.out.println("the character after is " + after);
 			}
 			if(before.compareTo("a") < 0 && after.compareTo("a") < 0 &&  noNegations(searchString, psn)){
@@ -167,7 +167,7 @@ public class ZhenMain {
 	
 	public static int pickRandomElement(int end){
 		//Returns an integer from [0,end) (end not included, use for array length)
-		return (int) Math.random()*end; 
+		return (int) (Math.random() * end); 
 	}
 
 }

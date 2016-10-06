@@ -15,7 +15,6 @@ public class ZhenClubs implements Chatbot{
 		while(inTestingLoop){
 			//Static call on promptInput method from main class
 			ZhenMain.println("Do you need help with your clubs or classes?");
-			ZhenMain.println("Type 'quit' to go back");
 			testingResponse = ZhenMain.promptInput();
 			checkOtherTriggers(testingResponse);
 			if(ZhenMain.findKeyword(testingResponse, "clubs", 0) >= 0 || ZhenMain.findKeyword(testingResponse, "credits", 0) >= 0){
@@ -69,7 +68,7 @@ public class ZhenClubs implements Chatbot{
 
 	@Override
 	public boolean isTriggered(String userInput) {
-		String[] triggers = {"classes", "club", "credits", "electives", "diploma"};
+		String[] triggers = {"classes", "club", "credits", "electives", "diploma", "clubs", "credit", "class"};
 		for(int index = 0; index < triggers.length; index++){
 			if(ZhenMain.findKeyword(userInput, triggers[index], 0) >= 0){
 				return true;
@@ -78,16 +77,52 @@ public class ZhenClubs implements Chatbot{
 		return false;
 	}
 
-	private static int getIntegerInput() {
-		ZhenMain.println("Please enter an integer.");
+	private static int getNonZeroIntegerInput() {
+		ZhenMain.println("Please enter a nonzero integer.");
 		String integerString = ZhenMain.promptInput();
 		boolean isInteger = false;
+		boolean isPositive =false;
 		int value = 0;
-		while(!isInteger){
+		while(!isInteger || !isPositive){
 			try{
 				value = Integer.parseInt(integerString);
 				//will not continue if an error above is thrown
 				isInteger = true;//exits loop if entry is valid
+				if(value <= 0){
+					isPositive = false;
+					ZhenMain.println("You must enter a positive integer.");
+					integerString = ZhenMain.promptInput();
+				}
+				else{
+					isPositive = true;
+				}
+			}catch(NumberFormatException e){
+				ZhenMain.println("You must enter a positive integer. You better try again.");
+				integerString = ZhenMain.promptInput();
+			}
+		}
+		return value;
+	}
+	
+	private static int getIntegerInput() {
+		ZhenMain.println("Please enter an integer.");
+		String integerString = ZhenMain.promptInput();
+		boolean isInteger = false;
+		boolean isPositive =false;
+		int value = 0;
+		while(!isInteger || !isPositive){
+			try{
+				value = Integer.parseInt(integerString);
+				//will not continue if an error above is thrown
+				isInteger = true;//exits loop if entry is valid
+				if(value < 0){
+					isPositive = false;
+					ZhenMain.println("You must enter a nonzero integer.");
+					integerString = ZhenMain.promptInput();
+				}
+				else{
+					isPositive = true;
+				}
 			}catch(NumberFormatException e){
 				ZhenMain.println("You must enter an integer. You better try again.");
 				integerString = ZhenMain.promptInput();
@@ -99,7 +134,7 @@ public class ZhenClubs implements Chatbot{
 	//Calls club credit algorithm after getting information from user
 	private String clubInfo(){
 		ZhenMain.println("How many semesters until you graduate?");
-		int remainingSemesters = getIntegerInput();
+		int remainingSemesters = getNonZeroIntegerInput();
 		ZhenMain.println("How many club credits do you have now?");
 		int currentCredits = getIntegerInput();
 		return getClubCredits(remainingSemesters,currentCredits);
@@ -133,33 +168,32 @@ public class ZhenClubs implements Chatbot{
 					return "You should join " + clubTypes[0] + checkPlurality(" team", clubTypes[0]) + " and " + clubTypes[1] + checkPlurality(" club", clubTypes[1]) + " this year.";					
 				}
 				else{
-					return "You should join " + regularClubs + " " + checkPlurality(" club", regularClubs) + " this year.";
+					return "You should join " + regularClubs + checkPlurality(" club", regularClubs) + " this year.";
 				}
 			}
 			
 			else{
 				regularClubs = (int) Math.ceil(averageCreditsPerSemester / 4);
-				return "You should join " + regularClubs + " " + checkPlurality(" club", regularClubs) + " this year.";
+				return "You should join " + regularClubs + checkPlurality(" club", regularClubs) + " this year.";
 			}
 		}
 	}
 	
 	private void checkOtherTriggers(String input){
-		if(JaviyMajor.isTriggered(input))
+		if(ZhenMain.major.isTriggered(input))
 		{
 			inTestingLoop = false;
-			JaviyMajor.talk();
+			ZhenMain.major.talk();
 		}
-		else if (SagawaGrammerBot.isTriggered(input)){
+		else if (ZhenMain.grammar.isTriggered(input)){
 			//Exit while loop
 			inTestingLoop = false;
-			println("debug");
 			//Go to the school's talk method
-			SagawaGrammerBot.talk();
+			ZhenMain.grammar.talk();
 		}
-		else if(AhmedCollege.isTriggered(input)){
+		else if(ZhenMain.college.isTriggered(input)){
 			inTestingLoop = false;
-			AhmedCollege.talk();
+			ZhenMain.college.talk();
 		}
 	}
 
