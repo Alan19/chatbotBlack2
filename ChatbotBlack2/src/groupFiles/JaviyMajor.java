@@ -302,12 +302,12 @@ public class JaviyMajor extends Object implements Chatbot{
 		return false;
 	}
 	private void checkOtherTriggers(String input){
-//		if(ZhenMain.clubs.isTriggered(input))
-//		{
-//			inMajorLoop = false;
-//			ZhenMain.println("...*sigh*...");
-//			ZhenMain.clubs.talk();
-//		}
+		if(ZhenMain.testing.isTriggered(input))
+		{
+			inMajorLoop = false;
+			ZhenMain.println("...*sigh*...");
+			ZhenMain.testing.talk();
+		}
 		if (ZhenMain.grammar.isTriggered(input)){
 			inMajorLoop = false;	
 			ZhenMain.println("...*sigh*...");

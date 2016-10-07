@@ -47,7 +47,7 @@ public class ZhenClubs implements Chatbot{
 		String[] courseDescription = {environmental, forensics, java, band, orchestra};
 		String[] triggerWords = {"environmental", "forensics", "java", "band", "orchestra"};
 		int[] periodsTaken = {2, 1, 2, 1, 1};
-		ZhenMain.println("Brooklyn Tech offers many electives. Some of the electives offered are AP Environmental Science, Forensics, Band, Orchestra and AP Java. How many free periods do you have?");
+		ZhenMain.println("Brooklyn Tech offers many electives that can be taken by students from any major. Some of the electives offered are AP Environmental Science, Forensics, Band, Orchestra and AP Java. How many free periods do you have?");
 		numberOfFreePeriods = getIntegerInput();
 		ZhenMain.println("Which course do you wish to learn about?");
 		testingResponse = ZhenMain.promptInput();
