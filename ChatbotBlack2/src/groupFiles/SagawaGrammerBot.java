@@ -19,7 +19,7 @@ public class SagawaGrammerBot implements Chatbot {
 			checkOtherTriggers(grammerResponse);
 			int lowerCase = ZhenMain.findKeyword(grammerResponse,  "sorry", 0);
 			ZhenMain.println(escalatingResponses[grammerCount]);
-			if((lowerCase >= 0 && noNegations(grammerResponse, lowerCase))){
+			if((lowerCase >= 0)){
 				ZhenMain.println("Apology accepted.");
 				inGrammerLoop = false;
 				ZhenMain.promptForever();
@@ -40,11 +40,11 @@ public class SagawaGrammerBot implements Chatbot {
 			String checkStringA = userInput.substring(yourPsn, yourPsn+3);
 			String checkStringThe = userInput.substring(yourPsn, yourPsn+5);
 			if (checkStringA.equals(" a ") || checkStringA.equals(" A ")){
-				ZhenMain.println("Oh my! Please apologize for your bad grammer - unless you meant to say I OWN a " + errorFragment(userInput));
+				ZhenMain.println("Oh my! Please apologize for your bad grammer - unless you meant to say I OWN " + errorFragment(userInput));
 				return true;
 			}
 			if (checkStringThe.toLowerCase().equals(" the ")){
-				ZhenMain.println("Oh my! Please apologize for your bad grammer - unless you meant to say I OWN a " + errorFragment(userInput));
+				ZhenMain.println("Oh my! Please apologize for your bad grammer - unless you meant to say I OWN " + errorFragment(userInput));
 				return true;
 			}
 		}
@@ -53,36 +53,10 @@ public class SagawaGrammerBot implements Chatbot {
 	
 	private static String errorFragment(String searchString) {
 		int yourPsn = ZhenMain.findKeyword(searchString,  "your",  0);
-		int locationOfSpace1 = 0;
-		int locationOfSpace2 = 0;
-		int locationOfSpace3 = 0;
-		for (int i = yourPsn; i < searchString.length(); i++){
-			if (searchString.substring(i, i+1) == " "){
-				locationOfSpace1 = i+1;
-				break;
-			}
-		}
-		for (int i = yourPsn+locationOfSpace1; i < searchString.length(); i++){
-			if (searchString.substring(i, i+1) == " "){
-				locationOfSpace2 = i+1;
-				break;
-			}
-		}
-		for (int i = yourPsn+locationOfSpace2; i < searchString.length(); i++){
-			if (searchString.substring(i, i+1) == " "){
-				locationOfSpace3 = i+1;
-				break;
-			}
-		}
-		return searchString.substring(locationOfSpace2, (locationOfSpace3 - 1));
+		int fuckThis = yourPsn + 5;
+		return searchString.substring(fuckThis, searchString.length());
 	}
 	
-	private static boolean noNegations(String searchString, int psn) {
-		if((psn - 6 >= 0) && searchString.substring(psn-6, psn-1).equals(" not ")){
-			return false;
-		}
-		return true;
-	}
 	
 	private void checkOtherTriggers(String input){
 		if(ZhenMain.major.isTriggered(input))
