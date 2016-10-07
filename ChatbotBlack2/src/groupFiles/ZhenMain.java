@@ -45,9 +45,9 @@ public class ZhenMain {
 
 	public static void promptForever() {
 		inMainLoop = true;
-		println("Hi, " + user + ". How are you?");
+		println("Hi " + user + ". How are you?");
 		while(inMainLoop){
-			println(user + ". Do you need any help? We can discuss talk about clubs, majors, grammar and more!");
+			println(user + ", do you need any help? We can discuss talk about clubs, majors, grammar and more!");
 			response = promptInput();
 			if(findKeyword(response, "good", 0) >= 0){
 				println("That's wonderful. So glad you feel good.");

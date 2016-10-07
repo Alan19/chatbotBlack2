@@ -5,8 +5,8 @@ public class ZhenClubs implements Chatbot{
 	private boolean inTestingLoop;
 	private String testingResponse;
 	private int calmCounter;
-	private String[] calmResponse = {"I don't understand what you mean.", "I can help you with clubs but maybe you need something else.", "I can't do anything if I don't know what you're saying."};
-	private String[] angryResponse = {"Don't you have something better to do?", "You won't be able to stay in a club or team if you act like this."};
+	private String[] calmResponse = {"I don't understand what you mean.", "I can help you with clubs but maybe you need something else.", "I can't do anything if I don't know what you're saying.", "Take some time to think about what you need to ask"};
+	private String[] angryResponse = {"Don't you have something better to do?", "You won't be able to stay in a club or team if you act like this.", "Acting like this is a great way to get excluded from trips.", "I'm think you might need to see a psychiatrist."};
 	
 	@Override
 	public void talk() {
@@ -41,22 +41,16 @@ public class ZhenClubs implements Chatbot{
 		String environmental = "The goal of the AP Environmental Science Course is to provide students with the scientific principles, concepts, and methodologies required to understand the inter-relationships of the natural world, to identify and analyze environmental problems both natural and human-made, to evaluate the relative risks associated with these problems, and to examine alternative solutions for resolving or preventing them.";
 		String forensics = "This course will teach you about the Crime Scene, Physical Evidence, Physical Properties: Glass and Soil, Organic Analysis, Inorganic Analysis, The Microscope, Hairs, Fibers and Paint, Drugs, Forensic Technology, Forensic Aspects of Arson and Explosion Investigations, Forensic Serology, DNA: The Indispensable Forensic Science Tool, Fingerprints, Firearms, Tool Marks, Document and Voice Examination, Computer Forensics, Forensic Science and the Internet, and the future of forensic criminology";
 		String java = "This course is an introduction Object Oriented programming using JAVA as a platform. In addition to the basic tools of programming, the course consists of Object Oriented Program Design, Program Implementation, Program Analysis, Standard Data Structures, Standard Algorithms, and Computing in Context.";
-		String calculus = "This course extends the ideas and techniques of single-variable Calculus into multi-dimensional space.Understanding functions of several variables through geometric and analytic means will be emphasized, and the techniques in the calculus of multi-variable functions will be developed. In addition, the calculus of parametric and vector-valued functions will be explored.";
+		String band = "This course is designed to teach the student how to develop the skills necessary to play in a high school level band.  The student should know and will build upon basic music theory and the rudiments of music.";
+		String orchestra = "The student will learn fourth position, minor scales, and many professional level exercises. The student will also be introduced to the band instruments, and we will perform in full orchestra format. The student will perform in 2 major concerts per year as well as other special assemblies and events.";
 		
-		String[] courseDescription = {environmental, forensics, java, calculus};
-		String[] triggerWords = {"environmental", "forensics", "java", "multivariable calculus"};
-		ZhenMain.println("Brooklyn Tech offers many electives. Some of the electives offered are AP Environmental Science, Forensics, Multivariable Calculus, and AP Java. Which course do you wish to learn about?");
+		String[] courseDescription = {environmental, forensics, java, band, orchestra};
+		String[] triggerWords = {"environmental", "forensics", "java", "band", "orchestra"};
+		ZhenMain.println("Brooklyn Tech offers many electives. Some of the electives offered are AP Environmental Science, Forensics, Band, Orchestra and AP Java. Which course do you wish to learn about?");
 		testingResponse = ZhenMain.promptInput();
-		for(int i = 0; i <= triggerWords.length; i++){
+		for(int i = 0; i < triggerWords.length; i++){
 			if(ZhenMain.findKeyword(testingResponse, triggerWords[i], 0) >= 0){
 				return courseDescription[i];
-			}
-			else if(calmCounter <= 5){
-				calmCounter += 1;
-				return calmResponse[ZhenMain.pickRandomElement(calmResponse.length)];
-			}
-			else{
-				return angryResponse[ZhenMain.pickRandomElement(angryResponse.length)];
 			}
 		}
 		if(calmCounter <= 5){
@@ -70,7 +64,7 @@ public class ZhenClubs implements Chatbot{
 
 	@Override
 	public boolean isTriggered(String userInput) {
-		String[] triggers = {"classes", "club", "credits", "electives", "diploma", "club", "credit", "class", "elective"};
+		String[] triggers = {"classes", "club", "credits", "electives", "diploma", "clubs", "credit", "class", "elective"};
 		for(int index = 0; index < triggers.length; index++){
 			if(ZhenMain.findKeyword(userInput, triggers[index], 0) >= 0){
 				return true;
@@ -188,6 +182,7 @@ public class ZhenClubs implements Chatbot{
 		if(ZhenMain.major.isTriggered(input))
 		{
 			inTestingLoop = false;
+			ZhenMain.println("Although that's not related to the topic...");
 			ZhenMain.major.talk();
 		}
 		else if (ZhenMain.grammar.isTriggered(input)){
@@ -198,12 +193,13 @@ public class ZhenClubs implements Chatbot{
 		}
 		else if(ZhenMain.college.isTriggered(input)){
 			inTestingLoop = false;
+			ZhenMain.println("Although that's not related to the topic...");
 			ZhenMain.college.talk();
 		}
 	}
 	
 	private boolean triggerArrayCheck(String input, String[] triggerList){
-		for(int index = 0; index <= triggerList.length; index++){
+		for(int index = 0; index < triggerList.length; index++){
 			if(ZhenMain.findKeyword(input, triggerList[index], 0) >= 0){
 				return true;
 			}
