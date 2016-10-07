@@ -74,19 +74,19 @@ public class ZhenClubs implements Chatbot{
 	}
 
 	private static int getNonZeroIntegerInput() {
-		ZhenMain.println("Please enter a nonzero integer.");
+		ZhenMain.println("Please enter a nonzero positive integer that is less than or equal to 8.");
 		String integerString = ZhenMain.promptInput();
 		boolean isInteger = false;
-		boolean isPositive =false;
+		boolean isPositive = false;
 		int value = 0;
 		while(!isInteger || !isPositive){
 			try{
 				value = Integer.parseInt(integerString);
 				//will not continue if an error above is thrown
 				isInteger = true;//exits loop if entry is valid
-				if(value <= 0){
+				if(value <= 0 || value > 8){
 					isPositive = false;
-					ZhenMain.println("You must enter a positive integer.");
+					ZhenMain.println("You must enter a positive integer that is less than or equal to 8.");
 					integerString = ZhenMain.promptInput();
 				}
 				else{
@@ -101,19 +101,19 @@ public class ZhenClubs implements Chatbot{
 	}
 	
 	private static int getIntegerInput() {
-		ZhenMain.println("Please enter an non-negative integer.");
+		ZhenMain.println("Please enter an non-negative integer less than or equal to 32.");
 		String integerString = ZhenMain.promptInput();
 		boolean isInteger = false;
-		boolean isPositive =false;
+		boolean isPositive = false;
 		int value = 0;
 		while(!isInteger || !isPositive){
 			try{
 				value = Integer.parseInt(integerString);
 				//will not continue if an error above is thrown
 				isInteger = true;//exits loop if entry is valid
-				if(value < 0){
+				if(value < 0 || value > 32){
 					isPositive = false;
-					ZhenMain.println("You must enter an non-negative integer.");
+					ZhenMain.println("You must enter an non-negative integer less than or equal to 32.");
 					integerString = ZhenMain.promptInput();
 				}
 				else{
@@ -147,9 +147,11 @@ public class ZhenClubs implements Chatbot{
 
 	private String getClubCredits(int semesters, int currentCredits){
 		int remainingCredits = 32-currentCredits;
-		int averageCreditsPerSemester = (int) Math.ceil(remainingCredits / semesters);
+		double averageCreditsPerSemester = Math.ceil((double)remainingCredits / semesters);
 		int teamNumber;
 		int regularClubs;
+		System.out.println(averageCreditsPerSemester);
+		System.out.println((double)(averageCreditsPerSemester/4));
 		if(remainingCredits <= 0){
 			return "You don't have to join any clubs this year. However, it's never bad to spend time with students after class if you have the time!";
 		}
@@ -170,7 +172,6 @@ public class ZhenClubs implements Chatbot{
 					return "You should join " + clubTypes[0] + checkPlurality(" team", clubTypes[0]) + " and " + clubTypes[1] + checkPlurality(" club", clubTypes[1]) + " this year.";					
 				}
 			}
-			
 			else{
 				regularClubs = (int) Math.ceil(averageCreditsPerSemester / 4);
 				return "You should join " + regularClubs + checkPlurality(" club", regularClubs) + " this year.";
