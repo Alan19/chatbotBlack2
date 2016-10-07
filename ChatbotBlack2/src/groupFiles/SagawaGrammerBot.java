@@ -35,7 +35,7 @@ public class SagawaGrammerBot implements Chatbot {
 	//we
 	@Override
 	public boolean isTriggered(String userInput) {
-		if (ZhenMain.findKeyword(userInput,  "your",  0) >= 0){
+		if (ZhenMain.findKeyword(userInput,  "your",  0) >= 0 && userInput.length() > 8){
 			int yourPsn = ZhenMain.findKeyword(userInput,  "your",  0);
 			String checkStringA = userInput.substring(yourPsn+4, yourPsn+7);
 			String checkStringThe = userInput.substring(yourPsn+4, yourPsn+9);
