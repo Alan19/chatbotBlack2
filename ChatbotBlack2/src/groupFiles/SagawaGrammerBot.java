@@ -13,7 +13,6 @@ public class SagawaGrammerBot implements Chatbot {
 
 	public void talk() {
 		inGrammerLoop = true;
-		ZhenMain.println("Oh my! Please apologize for your bad grammer - unless you meant to say I OWN a ");
 		grammerCount = 0;
 		while(inGrammerLoop){
 			grammerResponse = ZhenMain.promptInput();
@@ -41,11 +40,11 @@ public class SagawaGrammerBot implements Chatbot {
 			String checkStringA = userInput.substring(yourPsn, yourPsn+3);
 			String checkStringThe = userInput.substring(yourPsn, yourPsn+5);
 			if (checkStringA.equals(" a ") || checkStringA.equals(" A ")){
-				ZhenMain.println(errorFragment(userInput));
+				ZhenMain.println("Oh my! Please apologize for your bad grammer - unless you meant to say I OWN a " + errorFragment(userInput));
 				return true;
 			}
 			if (checkStringThe.toLowerCase().equals(" the ")){
-				ZhenMain.println(errorFragment(userInput));
+				ZhenMain.println("Oh my! Please apologize for your bad grammer - unless you meant to say I OWN a " + errorFragment(userInput));
 				return true;
 			}
 		}
@@ -54,25 +53,28 @@ public class SagawaGrammerBot implements Chatbot {
 	
 	private static String errorFragment(String searchString) {
 		int yourPsn = ZhenMain.findKeyword(searchString,  "your",  0);
-		int spaceCount = 0;
-		int trackerNumber = 1;
-		int locationOfSpace = 0;
+		int locationOfSpace1 = 0;
 		int locationOfSpace2 = 0;
-		while (spaceCount < 2 && locationOfSpace < searchString.length()){
-			locationOfSpace = yourPsn + trackerNumber;
-			if (searchString.substring((yourPsn + (trackerNumber-1)), (yourPsn + trackerNumber)) == " ") {
-				spaceCount++;
+		int locationOfSpace3 = 0;
+		for (int i = yourPsn; i < searchString.length(); i++){
+			if (searchString.substring(i, i+1) == " "){
+				locationOfSpace1 = i+1;
+				break;
 			}
-			trackerNumber++;
 		}
-		while (spaceCount < 3 && locationOfSpace < searchString.length()){
-			locationOfSpace2 = yourPsn + trackerNumber;
-			if (searchString.substring(yourPsn + (trackerNumber-1), yourPsn + trackerNumber) == " ") {
-				spaceCount++;
+		for (int i = yourPsn+locationOfSpace1; i < searchString.length(); i++){
+			if (searchString.substring(i, i+1) == " "){
+				locationOfSpace2 = i+1;
+				break;
 			}
-			trackerNumber++;
 		}
-		return searchString.substring(locationOfSpace, (locationOfSpace2 - 1));
+		for (int i = yourPsn+locationOfSpace2; i < searchString.length(); i++){
+			if (searchString.substring(i, i+1) == " "){
+				locationOfSpace3 = i+1;
+				break;
+			}
+		}
+		return searchString.substring(locationOfSpace2, (locationOfSpace3 - 1));
 	}
 	
 	private static boolean noNegations(String searchString, int psn) {
