@@ -6,7 +6,7 @@ public class ZhenClubs implements Chatbot{
 	private String testingResponse;
 	private int calmCounter;
 	private String[] calmResponse = {"I don't understand what you mean.", "I can help you with clubs but maybe you need something else.", "I can't do anything if I don't know what you're saying.", "Take some time to think about what you need to ask"};
-	private String[] angryResponse = {"Don't you have something better to do?", "You won't be able to stay in a club or team if you act like this.", "Acting like this is a great way to get excluded from trips.", "I'm think you might need to see a psychiatrist."};
+	private String[] angryResponse = {"Don't you have something better to do?", "You won't be able to stay in a club or team if you act like this.", "Acting like this is a great way to get excluded from trips.", "I'm think you might need to see a psychiatrist.", "You're going to have a hard time getting recommendation letters from your teacher if you keep avoiding the topic."};
 	
 	@Override
 	public void talk() {
@@ -43,13 +43,23 @@ public class ZhenClubs implements Chatbot{
 		String band = "This course is designed to teach the student how to develop the skills necessary to play in a high school level band.  The student should know and will build upon basic music theory and the rudiments of music.";
 		String orchestra = "The student will learn fourth position, minor scales, and many professional level exercises. The student will also be introduced to the band instruments, and we will perform in full orchestra format. The student will perform in 2 major concerts per year as well as other special assemblies and events.";
 		
+		int numberOfFreePeriods;
 		String[] courseDescription = {environmental, forensics, java, band, orchestra};
 		String[] triggerWords = {"environmental", "forensics", "java", "band", "orchestra"};
-		ZhenMain.println("Brooklyn Tech offers many electives. Some of the electives offered are AP Environmental Science, Forensics, Band, Orchestra and AP Java. Which course do you wish to learn about?");
+		int[] periodsTaken = {2, 1, 2, 1, 1};
+		ZhenMain.println("Brooklyn Tech offers many electives. Some of the electives offered are AP Environmental Science, Forensics, Band, Orchestra and AP Java. How many free periods do you have?");
+		numberOfFreePeriods = getIntegerInput();
+		ZhenMain.println("Which course do you wish to learn about?");
 		testingResponse = ZhenMain.promptInput();
+		
 		for(int i = 0; i < triggerWords.length; i++){
 			if(ZhenMain.findKeyword(testingResponse, triggerWords[i], 0) >= 0){
-				return courseDescription[i];
+				if(numberOfFreePeriods >= periodsTaken[i]){
+					return courseDescription[i];					
+				}
+				else{
+					return courseDescription[i] + " You might not be able to take this course as you do not have enough free periods.";
+				}
 			}
 		}
 		if(calmCounter <= 5){
@@ -72,7 +82,7 @@ public class ZhenClubs implements Chatbot{
 		return false;
 	}
 
-	private static int getNonZeroIntegerInput() {
+	private static int getNonZeroIntegerInputLessThan8() {
 		ZhenMain.println("Please enter a nonzero positive integer that is less than or equal to 8.");
 		String integerString = ZhenMain.promptInput();
 		boolean isInteger = false;
@@ -99,7 +109,7 @@ public class ZhenClubs implements Chatbot{
 		return value;
 	}
 	
-	private static int getIntegerInput() {
+	private static int getIntegerInputLessThan32() {
 		ZhenMain.println("Please enter an non-negative integer less than or equal to 32.");
 		String integerString = ZhenMain.promptInput();
 		boolean isInteger = false;
@@ -125,13 +135,40 @@ public class ZhenClubs implements Chatbot{
 		}
 		return value;
 	}
+	
+	private static int getIntegerInput() {
+		ZhenMain.println("Please enter an non-negative integer.");
+		String integerString = ZhenMain.promptInput();
+		boolean isInteger = false;
+		boolean isPositive = false;
+		int value = 0;
+		while(!isInteger || !isPositive){
+			try{
+				value = Integer.parseInt(integerString);
+				//will not continue if an error above is thrown
+				isInteger = true;//exits loop if entry is valid
+				if(value < 0){
+					isPositive = false;
+					ZhenMain.println("You must enter an non-negative integer less than or equal to 32.");
+					integerString = ZhenMain.promptInput();
+				}
+				else{
+					isPositive = true;
+				}
+			}catch(NumberFormatException e){
+				ZhenMain.println("You must enter an integer. You better try again.");
+				integerString = ZhenMain.promptInput();
+			}
+		}
+		return value;
+	}
 
 	//Calls club credit algorithm after getting information from user
 	private String clubInfo(){
 		ZhenMain.println("How many semesters until you graduate?");
-		int remainingSemesters = getNonZeroIntegerInput();
+		int remainingSemesters = getNonZeroIntegerInputLessThan8();
 		ZhenMain.println("How many club credits do you have now?");
-		int currentCredits = getIntegerInput();
+		int currentCredits = getIntegerInputLessThan32();
 		return getClubCredits(remainingSemesters,currentCredits);
 	}
 
