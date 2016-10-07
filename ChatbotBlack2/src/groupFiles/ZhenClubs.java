@@ -15,12 +15,14 @@ public class ZhenClubs implements Chatbot{
 		while(inTestingLoop){
 			//Static call on promptInput method from main class
 			ZhenMain.println("Do you need help with your clubs or classes?");
+			String[] clubTriggers = {"club", "clubs", "credit", "credits"};
+			String[] electiveTriggers = {"elective", "electives", "classes", "class"};
 			testingResponse = ZhenMain.promptInput();
 			checkOtherTriggers(testingResponse);
-			if(ZhenMain.findKeyword(testingResponse, "clubs", 0) >= 0 || ZhenMain.findKeyword(testingResponse, "credits", 0) >= 0){
+			if(triggerArrayCheck(testingResponse, clubTriggers)){
 				ZhenMain.println(clubInfo());				
 			}
-			else if(ZhenMain.findKeyword(testingResponse, "class", 0) >= 0){
+			else if(triggerArrayCheck(testingResponse, electiveTriggers)){
 				ZhenMain.println(classInfo());
 			}
 			else if(calmCounter <= 5){
@@ -68,7 +70,7 @@ public class ZhenClubs implements Chatbot{
 
 	@Override
 	public boolean isTriggered(String userInput) {
-		String[] triggers = {"classes", "club", "credits", "electives", "diploma", "clubs", "credit", "class"};
+		String[] triggers = {"classes", "club", "credits", "electives", "diploma", "club", "credit", "class", "elective"};
 		for(int index = 0; index < triggers.length; index++){
 			if(ZhenMain.findKeyword(userInput, triggers[index], 0) >= 0){
 				return true;
@@ -164,11 +166,14 @@ public class ZhenClubs implements Chatbot{
 				regularClubs = (int) Math.ceil(averageCreditsPerSemester / 4);
 				int[] clubTypes = {teamNumber, regularClubs};
 				//Recommends joining a team if credits are really needed, otherwise, recommends more clubs
-				if(regularClubs >= 1){
-					return "You should join " + clubTypes[0] + checkPlurality(" team", clubTypes[0]) + " and " + clubTypes[1] + checkPlurality(" club", clubTypes[1]) + " this year.";					
+				if(regularClubs >= 1 && teamNumber <= 0){
+					return "You should join " + clubTypes[0] + checkPlurality(" team", clubTypes[0]) + " this year.";					
+				}
+				else if(regularClubs <= 0 && teamNumber >= 1){
+					return "You should join " + teamNumber + checkPlurality(" team", regularClubs) + " this year.";					
 				}
 				else{
-					return "You should join " + regularClubs + checkPlurality(" club", regularClubs) + " this year.";
+					return "You should join " + clubTypes[0] + checkPlurality(" team", clubTypes[0]) + " and " + clubTypes[1] + checkPlurality(" club", clubTypes[1]) + " this year.";					
 				}
 			}
 			
@@ -195,6 +200,15 @@ public class ZhenClubs implements Chatbot{
 			inTestingLoop = false;
 			ZhenMain.college.talk();
 		}
+	}
+	
+	private boolean triggerArrayCheck(String input, String[] triggerList){
+		for(int index = 0; index <= triggerList.length; index++){
+			if(ZhenMain.findKeyword(input, triggerList[index], 0) >= 0){
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
