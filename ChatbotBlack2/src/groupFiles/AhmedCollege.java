@@ -131,6 +131,7 @@ private boolean inCollegeLoop;
 				}
 			}
 			else{
+				testScore = -1;
 				ZhenMain.println("I'm a little slow today so next time you answer this will you say your score and test in the same sentence? For me of course, not for any other reason.");
 			}
 		}
